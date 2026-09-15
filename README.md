@@ -1,7 +1,7 @@
 # blog
 
-A Markdown dev blog packaged as a container image. Posts live under `docs/`, `mkdocs.yml`
-configures the site, and the image builds on
+A Markdown dev blog packaged as a container image. Everything that changes regularly lives in
+`blog/`: posts under `blog/docs/` and the site configuration in `blog/mkdocs.yml`. The image builds on
 [`binarycodes/mkdocs`](https://github.com/cloudyhomelab/mkdocs-custom), which supplies
 MkDocs, the devblog theme and Caddy. Unlike the base image, the content is baked in: the
 strict build runs at image build time, so a broken post fails the build instead of the
@@ -14,10 +14,10 @@ docker run --rm -p 8000:8000 docker.io/binarycodes/mkdocs-dev-blog:latest
 
 ## Writing posts
 
-Run the MkDocs dev server from the base image with this directory mounted:
+Run the MkDocs dev server from the base image with `blog/` mounted:
 
 ```sh
-docker run --rm -p 8000:8000 -v "$PWD:/blog:ro" \
+docker run --rm -p 8000:8000 -v "$PWD/blog:/blog:ro" \
   docker.io/binarycodes/mkdocs:latest mkdocs serve --dev-addr=0.0.0.0:8000
 ```
 

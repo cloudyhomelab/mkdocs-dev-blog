@@ -1,4 +1,4 @@
-# blog
+# Dev Blog
 
 A Markdown dev blog packaged as a container image. Everything that changes regularly lives in
 `blog/`: posts under `blog/docs/` and the site configuration in `blog/mkdocs.yml`. The image builds on
@@ -24,17 +24,9 @@ docker run --rm -p 8000:8000 -v "$PWD/blog:/blog:ro" \
 Post front matter and site options are documented in the
 [theme README](https://github.com/cloudyhomelab/mkdocs-custom/blob/main/theme/README.md).
 
-## CI
+## License
 
-Pull requests run `validate.yml`: hadolint, the BuildKit checks, an amd64 image build
-(which is the strict site build) and an HTTP smoke test of the running container. Pushes
-to `main` run the same validation and then `publish.yml` pushes the image to Docker Hub
-for amd64 and arm64, tagged `latest` and the UTC build time as `yyyymmddhhmmss`, with provenance and SBOM
-attestations and a keyless cosign signature. A weekly rebuild picks up base-image
-updates. After the push, the workflow dispatches `podman-auto-update.yml` in
-`cloudyhomelab/vps_control` so the host pulls the new image right away instead of at its
-next timer window.
-
-Secrets: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` for the push, and
-`CLOUDYHOME_BOT_CLIENT_ID` and `CLOUDYHOME_BOT_PRIVATE_KEY` for the cross-repository
-dispatch (the cloudyhome bot App must be installed on `vps_control` with Actions write).
+Copyright (C) 2026 Sujoy Das. This project is free software: you can redistribute it
+and/or modify it under the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any later version.
+See [LICENSE](LICENSE). SPDX: `GPL-3.0-or-later`.

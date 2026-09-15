@@ -25,6 +25,7 @@ target "image" {
     "org.opencontainers.image.title"       = "${IMAGE_NAME}"
     "org.opencontainers.image.description" = "Dev blog: MkDocs site with the content baked in, served by Caddy on port 8000"
     "org.opencontainers.image.source"      = "${SOURCE_URL}"
+    "org.opencontainers.image.licenses"    = "GPL-3.0-or-later"
     "org.opencontainers.image.revision"    = "${GIT_SHA}"
   }
 

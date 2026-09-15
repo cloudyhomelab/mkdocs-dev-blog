@@ -31,4 +31,10 @@ Pull requests run `validate.yml`: hadolint, the BuildKit checks, an amd64 image 
 to `main` run the same validation and then `publish.yml` pushes the image to Docker Hub
 for amd64 and arm64, tagged `latest` and the UTC build time as `yyyymmddhhmmss`, with provenance and SBOM
 attestations and a keyless cosign signature. A weekly rebuild picks up base-image
-updates. The publish job needs the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` secrets.
+updates. After the push, the workflow dispatches `podman-auto-update.yml` in
+`cloudyhomelab/vps_control` so the host pulls the new image right away instead of at its
+next timer window.
+
+Secrets: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` for the push, and
+`CLOUDYHOME_BOT_CLIENT_ID` and `CLOUDYHOME_BOT_PRIVATE_KEY` for the cross-repository
+dispatch (the cloudyhome bot App must be installed on `vps_control` with Actions write).

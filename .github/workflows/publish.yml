@@ -92,3 +92,28 @@ jobs:
             echo "Signing ${ref}"
             cosign sign --yes "${ref}"
           done
+
+  roll-out:
+    name: pull the new image on the vps
+    runs-on: ubuntu-latest
+    needs: [publish]
+
+    permissions: {}
+
+    steps:
+      # GITHUB_TOKEN is scoped to this repository, so dispatching a workflow in
+      # vps_control needs the cloudyhome bot App, installed there with Actions write
+      - name: mint a token for the vps repository
+        id: bot
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.CLOUDYHOME_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.CLOUDYHOME_BOT_PRIVATE_KEY }}
+          owner: cloudyhomelab
+          repositories: vps_control
+          permission-actions: write
+
+      - name: run the podman auto-update workflow
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+        run: gh workflow run podman-auto-update.yml --repo cloudyhomelab/vps_control --ref main

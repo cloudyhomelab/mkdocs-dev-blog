@@ -9,7 +9,7 @@ container, and the container starts straight into Caddy on port 8000 over plain 
 
 ```sh
 LOCAL=true docker buildx bake --load
-docker run --rm -p 8000:8000 docker.io/binarycodes/blog:latest
+docker run --rm -p 8000:8000 docker.io/binarycodes/mkdocs-dev-blog:latest
 ```
 
 ## Writing posts

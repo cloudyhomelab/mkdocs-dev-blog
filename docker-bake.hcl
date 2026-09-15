@@ -1,10 +1,12 @@
 variable "REGISTRY"   { default = "docker.io" }
 variable "NAMESPACE"  { default = "binarycodes" }
-variable "IMAGE_NAME" { default = "blog" }
+variable "IMAGE_NAME" { default = "mkdocs-dev-blog" }
 
-# set by publish.yml so every published image also carries an immutable tag
-variable "GIT_SHA"    { default = "" }
-variable "SOURCE_URL" { default = "" }
+# set by publish.yml: the UTC build time (yyyymmddhhmmss) is the immutable tag of
+# every published image, the commit only goes into the revision label
+variable "BUILD_TIMESTAMP" { default = "" }
+variable "GIT_SHA"         { default = "" }
+variable "SOURCE_URL"      { default = "" }
 
 variable "LOCAL" { default = false }
 

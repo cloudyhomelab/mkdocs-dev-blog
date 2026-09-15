@@ -1,4 +1,11 @@
-# Wrapping a REST API in a MCP server
+---
+title: Wrapping a REST API in a MCP server
+description: All you need is Spring AI and about 10 minutes.
+date: 2026-09-15
+type: Guide
+tags: [MCP, Spring AI, Java]
+featured: true
+---
 
 This post describes how to wrap an existing REST API in an MCP server, using an exchange-rate service as the example. [Frankfurter](https://frankfurter.dev) publishes daily reference rates from about a hundred central banks. It has a small and well-documented API, and it needs no API key.
 
@@ -245,8 +252,8 @@ The pattern applies to any REST API with a small enough surface to wrap by hand 
 1. Write a thin typed client. Records for responses, one method per endpoint, and an error handler that extracts the API's own error message into an exception.
 2. Design the tools around the questions people ask, not around the endpoints. Add computed tools where the API lacks them. Force arguments that keep responses small.
 3. Accept forgiving input and normalise it. Throw exceptions with messages written for the model to read.
-4. Put everything that applies to every tool in `instructions`, and everything else in the parameter descriptions. Then observe what the model sends and revise.
+4. Put everything that applies to every tool in instructions, and everything else in the parameter descriptions. Then observe what the model sends and revise.
 5. Mock the client and test the MCP layer with the real SDK client. It catches schema and serialisation problems that unit tests on the tool methods miss.
 6. Build the jar, wrap it in a container and let a reverse proxy handle TLS. Decide on authentication if required.
 
-Adapting the repository to another API requires replacing the `client` package and rewriting the tools. The configuration, container, and CI carry over unchanged.
+Adapting the repository to another API requires replacing the client package and rewriting the tools. The configuration, container, and CI carry over unchanged.

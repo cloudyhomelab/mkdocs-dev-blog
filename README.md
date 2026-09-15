@@ -29,6 +29,6 @@ Post front matter and site options are documented in the
 Pull requests run `validate.yml`: hadolint, the BuildKit checks, an amd64 image build
 (which is the strict site build) and an HTTP smoke test of the running container. Pushes
 to `main` run the same validation and then `publish.yml` pushes the image to Docker Hub
-for amd64 and arm64, tagged `latest` and `sha-<commit>`, with provenance and SBOM
+for amd64 and arm64, tagged `latest` and the UTC build time as `yyyymmddhhmmss`, with provenance and SBOM
 attestations and a keyless cosign signature. A weekly rebuild picks up base-image
 updates. The publish job needs the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` secrets.

@@ -46,10 +46,15 @@ jobs:
         with:
           driver: docker-container
 
+      - name: take the build timestamp
+        id: stamp
+        run: echo "value=$(date -u +%Y%m%d%H%M%S)" >> "$GITHUB_OUTPUT"
+
       - name: build and push
         id: bake
         uses: docker/bake-action@d3418bd7d0e9324001bca92fa8ba175ea7e6dc9b # v7.3.0
         env:
+          BUILD_TIMESTAMP: ${{ steps.stamp.outputs.value }}
           GIT_SHA: ${{ github.sha }}
           SOURCE_URL: ${{ github.server_url }}/${{ github.repository }}
         with:

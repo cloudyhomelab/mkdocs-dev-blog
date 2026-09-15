@@ -30,7 +30,7 @@ target "image" {
 
   tags = concat(
     ["${REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:latest"],
-    GIT_SHA != "" ? ["${REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:sha-${substr(GIT_SHA, 0, 12)}"] : [],
+    BUILD_TIMESTAMP != "" ? ["${REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${BUILD_TIMESTAMP}"] : [],
   )
 
   platforms = LOCAL ? [] : ["linux/amd64", "linux/arm64"]

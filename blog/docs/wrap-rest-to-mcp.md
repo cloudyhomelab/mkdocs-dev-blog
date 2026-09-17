@@ -4,7 +4,7 @@ description: All you need is Spring AI and about 10 minutes.
 date: 2026-09-15
 type: Guide
 tags: [MCP, Spring AI, Java]
-featured: true
+featured: false
 ---
 
 This post describes how to wrap an existing REST API in an MCP server, using an exchange-rate service as the example. [Frankfurter](https://frankfurter.dev) publishes daily reference rates from about a hundred central banks. It has a small and well-documented API, and it needs no API key.

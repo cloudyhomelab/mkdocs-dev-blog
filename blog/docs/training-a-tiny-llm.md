@@ -8,8 +8,6 @@ featured: true
 ---
 
 
-# Training a tiny language model on a laptop
-
 This post describes how to train a small GPT-style language model from scratch on an Apple silicon Mac, using children's stories and a set of technical documentation as the training data. TinyStories is a public corpus of short stories written in the vocabulary of a three-year-old. It is about two gigabytes of plain text, and a model with a few tens of millions of parameters learns to produce coherent stories from it.
 
 It covers the tokenizer, the data pipeline, the model, the training loop and sampling. The project is at `github.com/binarycodes/tiny-llm`.
